@@ -1,17 +1,12 @@
-// Data source for English level quiz questions.
-
-
-// In reality, providing 300 unique questions in one go is a lot of text. 
-// I will provide a condensed version with the 70 and then 230 structured generated ones.
-
-const existingQuestions = [
+export const QUESTIONS = [
+    // --- ORIGINAL T11 QUESTIONS (1-70) ---
     { id: 1, category: 'tenses', question: 'The CEO _______ the new marketing strategy currently in the conference room.', options: ['discusses', 'discussed', 'is discussing', 'has discussed'], answer: 2, explanation: '"currently"는 현재 진행(am/is/are + -ing)의 단서입니다.' },
     { id: 2, category: 'tenses', question: 'By the time the train arrives, I _______ at the station for two hours.', options: ['wait', 'am waiting', 'will have been waiting', 'have been waiting'], answer: 2, explanation: '"By the time + 현재동사"와 "for 기간"이 결합하면 미래 완료 진행이 정답입니다.' },
     { id: 3, category: 'tenses', question: 'While they _______ for the bus, it started to rain heavily.', options: ['wait', 'waited', 'were waiting', 'have waited'], answer: 2, explanation: '과거의 특정 시점에 진행 중인 동작은 과거 진행형을 씁니다.' },
     { id: 4, category: 'tenses', question: 'He _______ in the garden since early this morning.', options: ['works', 'is working', 'has been working', 'will work'], answer: 2, explanation: '"since + 시점"은 현재 완료 진행형의 강력한 단서입니다.' },
     { id: 5, category: 'tenses', question: 'Look! The children _______ soccer in the park right now.', options: ['play', 'played', 'are playing', 'have played'], answer: 2, explanation: '"right now"와 "Look!"은 현재 진행형을 요구합니다.' },
     { id: 6, category: 'tenses', question: 'She _______ for the exam for three hours before her friends arrived.', options: ['studies', 'is studying', 'had been studying', 'will study'], answer: 2, explanation: '과거 특정 시점 이전에 계속되던 동작은 과거 완료 진행형을 씁니다.' },
-    { id: 7, category: 'tenses', question: 'Next month, we _______ on this project for exactly one year.', options: ['work', 'are working', 'will have been working', 'have worked'], answer: 2, explanation: '미래 특정 시점까지의持续 기간은 미래 완료 진행형을 씁니다.' },
+    { id: 7, category: 'tenses', question: 'Next month, we _______ on this project for exactly one year.', options: ['work', 'are working', 'will have been working', 'have worked'], answer: 2, explanation: '미래 특정 시점까지의 지속 기간은 미래 완료 진행형을 씁니다.' },
     { id: 8, category: 'tenses', question: 'The team _______ the final details of the contract at the moment.', options: ['finalizes', 'finalized', 'is finalizing', 'was finalizing'], answer: 2, explanation: '"at the moment"는 현재 진행형의 단서입니다.' },
     { id: 9, category: 'tenses', question: 'They _______ the house all day yesterday when the power went out.', options: ['clean', 'cleaned', 'were cleaning', 'have cleaned'], answer: 2, explanation: '과거의 특정 시점에 계속되던 일은 과거 진행형입니다.' },
     { id: 10, category: 'tenses', question: 'By next year, he _______ English for ten years.', options: ['studies', 'will be studying', 'will have been studying', 'has been studying'], answer: 2, explanation: '미래 시점(By next year)까지의 기간은 미래 완료 진행형이 정답입니다.' },
@@ -74,66 +69,65 @@ const existingQuestions = [
     { id: 67, category: 'tenses', question: 'The tactical team _______ the operation plan currently in the briefing room.', options: ['discusses', 'is discussing', 'discussed', 'has discussed'], answer: 1, explanation: '현재 진행형(am/is/are + -ing)을 요구합니다.' },
     { id: 68, category: 'subjunctive', question: 'If the supplies _______ delivered on time yesterday, the mission would have been successful.', options: ['are', 'were', 'had been', 'be'], answer: 2, explanation: '가정법 과거완료(had p.p)를 씁니다.' },
     { id: 69, category: 'should-deletion', question: 'It is mandatory that every trainee _______ the registration form by Friday.', options: ['submit', 'submits', 'submitted', 'submitting'], answer: 0, explanation: '당위성 형용사 뒤의 that절에는 동사원형을 씁니다.' },
-    { id: 70, category: 'verbals', question: 'The recruit admitted _______ the orders without proper authorization.', options: ['follow', 'to follow', 'following', 'to following'], answer: 2, explanation: 'admit은 동명사(-ing)를 목적어로 취합니다.' }
+    { id: 70, category: 'verbals', question: 'The recruit admitted _______ the orders without proper authorization.', options: ['follow', 'to follow', 'following', 'to following'], answer: 2, explanation: 'admit은 동명사(-ing)를 목적어로 취합니다.' },
+
+    // --- ADDITIONAL GENERATED QUESTIONS (71-300) ---
+    ...Array.from({ length: 230 }, (_, i) => {
+        const id = 71 + i;
+        const categories = ['tenses', 'subjunctive', 'should-deletion', 'verbals', 'connectives', 'relatives', 'vocabulary'];
+        const cat = categories[i % categories.length];
+
+        if (cat === 'tenses') {
+            const scenarios = [
+                { q: 'The researchers _______ the experiment results currently in the laboratory.', o: ['analyze', 'analyzed', 'are analyzing', 'have analyzed'], a: 2, e: 'currently는 현재 진행형의 단서입니다.' },
+                { q: 'By next week, she _______ here for exactly five years.', o: ['works', 'is working', 'will have been working', 'has worked'], a: 2, e: '미래 시점과 기간이 결합하면 미래 완료 진행형이 정답입니다.' },
+                { q: 'They _______ the reports for two hours when the manager entered.', o: ['review', 'reviewed', 'were reviewing', 'had been reviewing'], a: 3, e: '과거 기준 시점 이전부터 계속되던 일은 과거 완료 진행형입니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else if (cat === 'subjunctive') {
+            const scenarios = [
+                { q: 'If the company _______ more funds last year, it would have survived.', o: ['has', 'had', 'had had', 'was having'], a: 2, e: '가정법 과거완료(had p.p)가 필요합니다.' },
+                { q: 'I would join the marathon if I _______ in better shape.', o: ['am', 'was', 'were', 'had been'], a: 2, e: '가정법 과거에서 be동사는 were입니다.' },
+                { q: 'Had he _______ the risk, he would not have invested so much.', o: ['know', 'knew', 'known', 'knowing'], a: 2, e: 'If 생략 도치 구문 Had p.p입니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else if (cat === 'should-deletion') {
+            const scenarios = [
+                { q: 'It is crucial that the witness _______ the truth in court.', o: ['tell', 'tells', 'told', 'telling'], a: 0, e: 'crucial 뒤의 that절은 동사원형입니다.' },
+                { q: 'He requested that the meeting _______ postponed until Monday.', o: ['is', 'was', 'be', 'been'], a: 2, e: 'request 뒤의 that절 동사원형 be입니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else if (cat === 'verbals') {
+            const scenarios = [
+                { q: 'The manager considered _______ the project deadline by two weeks.', o: ['extend', 'to extend', 'extending', 'extended'], a: 2, e: 'consider는 동명사를 목적어로 취합니다.' },
+                { q: 'She failed _______ the minimum requirements for the position.', o: ['meet', 'to meet', 'meeting', 'met'], a: 1, e: 'fail은 to-부정사를 목적어로 취합니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else if (cat === 'connectives') {
+            const scenarios = [
+                { q: '_______ the economic crisis, the startup managed to expand.', o: ['Because', 'Although', 'Despite', 'Since'], a: 2, e: '명사구 앞 양보 전치사 Despite입니다.' },
+                { q: 'He saved money _______ he could buy a house eventually.', o: ['so that', 'because of', 'although', 'unless'], a: 0, e: '목적을 나타내는 so that입니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else if (cat === 'relatives') {
+            const scenarios = [
+                { q: 'The candidate _______ spoke first was the most impressive.', o: ['which', 'whom', 'who', 'whose'], a: 2, e: '사람 주격 관계대명사 who입니다.' },
+                { q: 'This is the office _______ the strategy was developed.', o: ['which', 'where', 'when', 'who'], a: 1, e: '장소 관계부사 where입니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        } else {
+            const scenarios = [
+                { q: 'The new policy aims to _______ the production process.', o: ['streamline', 'straighten', 'strengthen', 'standard'], a: 0, e: '프로세스 효율화(streamline)가 적절합니다.' },
+                { q: 'The results were _______ with our initial expectations.', o: ['consistent', 'constant', 'considered', 'contained'], a: 0, e: '일치하는(consistent)이 문맥상 맞습니다.' }
+            ];
+            const s = scenarios[i % scenarios.length];
+            return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
+        }
+    })
 ];
-
-const generatedQuestions = Array.from({ length: 230 }, (_, i) => {
-    const id = 71 + i;
-    const categories = ['tenses', 'subjunctive', 'should-deletion', 'verbals', 'connectives', 'relatives', 'vocabulary'];
-    const cat = categories[i % categories.length];
-
-    if (cat === 'tenses') {
-        const scenarios = [
-            { q: 'The researchers _______ the experiment results currently in the laboratory.', o: ['analyze', 'analyzed', 'are analyzing', 'have analyzed'], a: 2, e: 'currently는 현재 진행형의 단서입니다.' },
-            { q: 'By next week, she _______ here for exactly five years.', o: ['works', 'is working', 'will have been working', 'has worked'], a: 2, e: '미래 시점과 기간이 결합하면 미래 완료 진행형이 정답입니다.' },
-            { q: 'They _______ the reports for two hours when the manager entered.', o: ['review', 'reviewed', 'were reviewing', 'had been reviewing'], a: 3, e: '과거 기준 시점 이전부터 계속되던 일은 과거 완료 진행형입니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else if (cat === 'subjunctive') {
-        const scenarios = [
-            { q: 'If the company _______ more funds last year, it would have survived.', o: ['has', 'had', 'had had', 'was having'], a: 2, e: '가정법 과거완료(had p.p)가 필요합니다.' },
-            { q: 'I would join the marathon if I _______ in better shape.', o: ['am', 'was', 'were', 'had been'], a: 2, e: '가정법 과거에서 be동사는 were입니다.' },
-            { q: 'Had he _______ the risk, he would not have invested so much.', o: ['know', 'knew', 'known', 'knowing'], a: 2, e: 'If 생략 도치 구문 Had p.p입니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else if (cat === 'should-deletion') {
-        const scenarios = [
-            { q: 'It is crucial that the witness _______ the truth in court.', o: ['tell', 'tells', 'told', 'telling'], a: 0, e: 'crucial 뒤의 that절은 동사원형입니다.' },
-            { q: 'He requested that the meeting _______ postponed until Monday.', o: ['is', 'was', 'be', 'been'], a: 2, e: 'request 뒤의 that절 동사원형 be입니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else if (cat === 'verbals') {
-        const scenarios = [
-            { q: 'The manager considered _______ the project deadline by two weeks.', o: ['extend', 'to extend', 'extending', 'extended'], a: 2, e: 'consider는 동명사를 목적어로 취합니다.' },
-            { q: 'She failed _______ the minimum requirements for the position.', o: ['meet', 'to meet', 'meeting', 'met'], a: 1, e: 'fail은 to-부정사를 목적어로 취합니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else if (cat === 'connectives') {
-        const scenarios = [
-            { q: '_______ the economic crisis, the startup managed to expand.', o: ['Because', 'Although', 'Despite', 'Since'], a: 2, e: '명사구 앞 양보 전치사 Despite입니다.' },
-            { q: 'He saved money _______ he could buy a house eventually.', o: ['so that', 'because of', 'although', 'unless'], a: 0, e: '목적을 나타내는 so that입니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else if (cat === 'relatives') {
-        const scenarios = [
-            { q: 'The candidate _______ spoke first was the most impressive.', o: ['which', 'whom', 'who', 'whose'], a: 2, e: '사람 주격 관계대명사 who입니다.' },
-            { q: 'This is the office _______ the strategy was developed.', o: ['which', 'where', 'when', 'who'], a: 1, e: '장소 관계부사 where입니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    } else {
-        const scenarios = [
-            { q: 'The new policy aims to _______ the production process.', o: ['streamline', 'straighten', 'strengthen', 'standard'], a: 0, e: '프로세스 효율화(streamline)가 적절합니다.' },
-            { q: 'The results were _______ with our initial expectations.', o: ['consistent', 'constant', 'considered', 'contained'], a: 0, e: '일치하는(consistent)이 문맥상 맞습니다.' }
-        ];
-        const s = scenarios[i % scenarios.length];
-        return { id, category: cat, question: s.q, options: s.o, answer: s.a, explanation: s.e };
-    }
-});
-
-export const QUESTIONS = [...existingQuestions, ...generatedQuestions];
